@@ -17,7 +17,7 @@ export const environment = {
     },
     amplify: {
 
-        // Got to give it something to work on serverless online
+        // Got to give it something to work on serverless offline
         Auth: {
             identityPoolId: 'xxxxx',
             region: 'us-east-1',
