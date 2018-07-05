@@ -1,0 +1,154 @@
+
+<mat-tab-group color="primary" style="height: 650px" >
+    <mat-tab color="primary" label="Trader Functions">
+        <form class="example-container" (ngSubmit)="formSubmit(formMyTrader.value)" [formGroup]="formMyTrader">
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                        </mat-panel-title>
+                        <mat-panel-description style="text-align: center;">
+                            <!--
+                                <h2>{{formMyTrader.value.symbol}}-{{formMyTrader.value.interval}}-{{formMyTrader.value.priceType}}</h2>
+                            -->
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-card  style="margin-top: 5px; text-align: center;">
+                        <mat-form-field style="margin-top: 10px;">
+                            <mat-label>Symbol</mat-label>
+                            <input matInput required formControlName="symbol">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field style="margin-top: 5px;">
+                            <mat-autocomplete  #intervalAuto="matAutocomplete">
+                                <mat-option *ngFor="let option of intervalOptions" [value]="option">
+                                    {{ option }}
+                                </mat-option>
+                            </mat-autocomplete>
+                            <mat-label>Interval</mat-label>
+                            <input type="text" required placeholder="Pick one" aria-label="Number" matInput  formControlName="interval" [matAutocomplete]="intervalAuto">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field style="margin-top: 5px;">
+                            <mat-label>TimePeriod</mat-label>
+                            <input type="Number" required  aria-label="Number" matInput  formControlName="timePeriod" >
+                        </mat-form-field>
+                            <br>
+
+                            <mat-form-field style="margin-top: 5px;">
+                                <mat-autocomplete #priceTypeAuto="matAutocomplete">
+                                    <mat-option *ngFor="let option of priceTypeOptions" [value]="option">
+                                        {{ option }}
+                                    </mat-option>
+                                </mat-autocomplete>
+                                <mat-label>PriceType</mat-label>
+                                <input type="text" required placeholder="Pick one" aria-label="Number" matInput  formControlName="priceType" [matAutocomplete]="priceTypeAuto">
+                            </mat-form-field>
+                            <br>
+                            <mat-checkbox required formControlName="todayOnly">
+                                TodayOnly
+                            </mat-checkbox>
+                    </mat-card>
+                    <mat-card>
+                    <h3>Volume: {{formMyTrader.value.symbol}}-{{formMyTrader.value.interval}}</h3>
+                          <div id="volPlot"><!-- Plotly chart will be drawn inside this DIV --></div>
+                    </mat-card>
+                    <mat-card>
+                    <h3>Price: {{formMyTrader.value.symbol}}-{{formMyTrader.value.interval}}</h3>
+                          <div id="pricePlot"><!-- Plotly chart will be drawn inside this DIV --></div>
+                    </mat-card>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+
+            <mat-card  style="margin-top: 5px; text-align: center;">
+                <app-macd1 [parentForm]="formMyTrader"></app-macd1>
+                <app-rsi [parentForm]="formMyTrader"></app-rsi>
+            </mat-card>
+        </form>
+    </mat-tab>
+    <mat-tab label="News">
+        <form class="example-container" (ngSubmit)="formSubmit2(formMyTraderNews.value)" [formGroup]="formMyTraderNews">
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                        </mat-panel-title>
+                        <mat-panel-description style="text-align: center;">
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-card  style="margin-top: 5px; text-align: center;">
+                        <mat-form-field style="margin-top: 10px;">
+                            <mat-label>Country</mat-label>
+                            <input matInput required formControlName="country">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field style="margin-top: 5px;">
+                            <mat-autocomplete  #newsCategoryAuto="matAutocomplete">
+                                <mat-option *ngFor="let option of newsCategoryOptions" [value]="option">
+                                    {{ option }}
+                                </mat-option>
+                            </mat-autocomplete>
+                            <mat-label>News Category</mat-label>
+                            <input type="text" required placeholder="Pick one" aria-label="Number" matInput  formControlName="newsCategory" [matAutocomplete]="newsCategoryAuto">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field style="margin-top: 10px;">
+                            <mat-label>Filter On</mat-label>
+                            <input matInput formControlName="grepFilter">
+                        </mat-form-field>
+                    </mat-card>
+                </mat-expansion-panel>
+            </mat-accordion>
+
+            <mat-card  style="margin-top: 5px; text-align: center;">
+                <app-news [parentForm]="formMyTraderNews"></app-news>
+            </mat-card>
+        </form>
+    </mat-tab>
+    <mat-tab label="Other">
+        <form class="example-container" (ngSubmit)="formSubmit3(formMyTraderOther.value)" [formGroup]="formMyTraderOther">
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                        </mat-panel-title>
+                        <mat-panel-description style="text-align: center;">
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-card  style="margin-top: 5px; text-align: center;">
+                        <mat-form-field style="margin-top: 5px;">
+                            <mat-autocomplete  #stockAPIAuto="matAutocomplete">
+                                <mat-option *ngFor="let option of stockAPIOptions" [value]="option">
+                                    {{ option }}
+                                </mat-option>
+                            </mat-autocomplete>
+                            <mat-label>Stock API</mat-label>
+                            <input type="text" required placeholder="Pick one" aria-label="Number" matInput  formControlName="stockAPI" [matAutocomplete]="stockAPIAuto">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field style="margin-top: 10px;">
+                            <mat-label>Function</mat-label>
+                            <input matInput required formControlName="function">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field style="margin-top: 10px;">
+                            <mat-label>Arguments</mat-label>
+                            <input matInput required formControlName="arguments">
+                        </mat-form-field>
+                    </mat-card>
+                </mat-expansion-panel>
+            </mat-accordion>
+
+            <mat-card  style="margin-top: 5px; text-align: center;">
+                <app-other [parentForm]="formMyTraderOther"></app-other>
+            </mat-card>
+        </form>
+    </mat-tab>
+
+</mat-tab-group>
+<!--
+    <pre>
+{{formMyTrader.value | json}}
+    </pre>
+    -->

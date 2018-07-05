@@ -1,0 +1,8 @@
+<div>
+    <br>
+    <button mat-raised-button color="primary" (click)="rsi([parentForm.value])">RSI</button>
+</div>
+<mat-card>
+    <h3>{{symbol}}-{{interval}}-{{priceType}}</h3>
+    <div id="rsiPlot1"><!-- Plotly chart will be drawn inside this DIV --></div>
+</mat-card>

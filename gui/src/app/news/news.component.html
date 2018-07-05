@@ -1,0 +1,23 @@
+<div>
+    <br>
+    <button mat-raised-button color="primary" (click)="headlineNews([parentForm.value])">Headline News</button>
+</div>
+<div>
+    <br>
+    <button mat-raised-button color="primary" (click)="allNews([parentForm.value])">All News</button>
+</div>
+<mat-card>
+    <div style="text-align: left;">
+        <ul>
+            <li *ngFor="let item of result">
+<!--
+                <a target= "_blank" href={{item.URL}}><p>{{item.title}}</p></a>
+                <p *ngfor="let key of Object.keys(item)">{{key}}</p>
+-->
+                <p>{{item.description}}</p>
+                <p>{{item.date}}</p>
+                <br>
+            </li>
+        </ul>
+    </div>
+</mat-card>

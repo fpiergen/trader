@@ -1,0 +1,125 @@
+<mat-card style="margin-top: 50px;">
+    <mat-tab-group>
+	<mat-tab label="MCAD">
+	    <mat-card style="margin-top: 5px; text-align: center;">
+		<form class="example-container" 
+	[formGroup]="formMacd"
+	(ngSubmit)="btnClick(formMacd.value)">
+
+                        <mat-checkbox required formControlName="todayOnly">
+                            TodayOnly
+                        </mat-checkbox>
+		    <br>
+		    <mat-form-field style="margin-top: 10px;">
+			<mat-label>Symbol</mat-label>
+                        <input matInput required formControlName="symbol">
+		    </mat-form-field>
+		    <br>
+		    <mat-form-field style="margin-top: 5px;">
+                        <mat-autocomplete  #intervalAuto="matAutocomplete">
+			    <mat-option *ngFor="let option of intervalOptions" [value]="option">
+				{{ option }}
+			    </mat-option>
+			</mat-autocomplete>
+			<mat-label>Interval</mat-label>
+                        <input type="text" required placeholder="Pick one" aria-label="Number" matInput  formControlName="interval" [matAutocomplete]="intervalAuto">
+		    </mat-form-field>
+		    <br>
+		    <mat-form-field style="margin-top: 5px;">
+			<mat-label>TimePeriod</mat-label>
+			<input type="Number" required  aria-label="Number" matInput  formControlName="timePeriod" >
+		    </mat-form-field>
+			<br>
+
+			<mat-form-field style="margin-top: 5px;">
+			    <mat-autocomplete #priceTypeAuto="matAutocomplete">
+				<mat-option *ngFor="let option of priceTypeOptions" [value]="option">
+				    {{ option }}
+				</mat-option>
+			    </mat-autocomplete>
+			    <mat-label>PriceType</mat-label>
+			    <input type="text" required placeholder="Pick one" aria-label="Number" matInput  formControlName="priceType" [matAutocomplete]="priceTypeAuto">
+			</mat-form-field>
+			<br>
+			<mat-form-field style="margin-top: 5px;">
+			    <mat-label>FastPeriod</mat-label>                                                            
+			    <input type="Number" placeholder="12" aria-label="Number" matInput  formControlName="fastPeriod" >
+			</mat-form-field>
+			    <br>
+			    <mat-form-field style="margin-top: 5px;">                                                        
+				<mat-label>SlowPeriod</mat-label>
+				<input type="Number" placeholder="26" aria-label="Number" matInput  formControlName="slowPeriod" >
+			    </mat-form-field>
+				<br>
+				<mat-form-field style="margin-top: 5px;">
+				    <mat-label>SignalPeriod</mat-label>
+				    <input type="Number" placeholder="9" aria-label="Number" matInput  formControlName="signalPeriod" >
+				</mat-form-field>
+
+				    <div>
+					<button mat-raised-button color="primary" type="submit">MACD</button>
+				    </div>
+
+		</form>
+	    </mat-card>
+	</mat-tab>
+        <mat-tab label="RSI">
+            <mat-card style="margin-top: 5px; text-align: center;">
+                <form class="example-container" 
+                      [formGroup]="formRsi"
+                      (ngSubmit)="btnClick2(formRsi.value)">
+
+                    <mat-form-field style="margin-top: 10px;">
+                        <mat-label>Symbol</mat-label>
+                        <input matInput required formControlName="symbol">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field style="margin-top: 5px;">
+                        <mat-autocomplete #intervalAuto="matAutocomplete">
+                            <mat-option *ngFor="let option of intervalOptions" [value]="option">
+                                {{ option }}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <mat-label>Interval</mat-label>
+                        <input type="text" required placeholder="Pick one" aria-label="Number" matInput  formControlName="interval" [matAutocomplete]="intervalAuto">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field style="margin-top: 5px;">
+                        <mat-label>TimePeriod</mat-label>
+                        <input type="Number" required aria-label="Number" matInput  formControlName="timePeriod" >
+                    </mat-form-field>
+                        <br>
+
+                        <mat-form-field style="margin-top: 5px;">
+                            <mat-autocomplete #priceTypeAuto="matAutocomplete">
+                                <mat-option *ngFor="let option of priceTypeOptions" [value]="option">
+                                    {{ option }}
+                                </mat-option>
+                            </mat-autocomplete>
+                            <mat-label>PriceType</mat-label>
+                            <input type="text" required placeholder="Pick one" aria-label="Number" matInput  formControlName="priceType" [matAutocomplete]="priceTypeAuto">
+                        </mat-form-field>
+                        <div>
+                            <button mat-raised-button color="primary" type="submit">RSI</button>
+                        </div>
+
+                </form>
+            </mat-card>
+        </mat-tab>
+    </mat-tab-group>
+
+    <mat-card>
+        <h2 style="text-align: center;">{{macdCompany}}-MACD</h2>
+        <div id="mcadPlot"><!-- Plotly chart will be drawn inside this DIV --></div>
+    </mat-card>
+    <mat-card>
+        <h2 style="text-align: center;">{{rsiCompany}}-RSI</h2>
+        <div id="rsiPlot"><!-- Plotly chart will be drawn inside this DIV --></div>
+    </mat-card>
+    <mat-card>
+        <div align="left">
+            <pre>{{result}}</pre>
+        </div>
+    </mat-card>
+
+</mat-card>

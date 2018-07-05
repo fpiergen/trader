@@ -1,0 +1,16 @@
+<div>
+    <br>
+    <button mat-raised-button color="primary" (click)="callAPI(parentForm.value)">APICall</button>
+</div>
+<mat-card style="text-align: left;">
+    <pre>
+      {{result|json}}
+    </pre>
+</mat-card>
+<!--
+<mat-card>
+    <div style="text-align: left;">
+        {{result | json}}
+    </div>
+</mat-card>
+-->

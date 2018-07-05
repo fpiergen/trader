@@ -1,0 +1,63 @@
+<form class="example-container" (ngSubmit)="formSubmit(formMyTrader.value)" [formGroup]="formMyTrader">
+    <mat-label style="text-align: center;">
+        <h2>Input</h2>
+    </mat-label>
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                </mat-panel-title>
+                <mat-panel-description style="text-align: center;">
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-card  style="margin-top: 5px; text-align: center;">
+                <mat-form-field style="margin-top: 10px;">
+                    <mat-label>Symbol</mat-label>
+                    <input matInput required formControlName="symbol">
+                </mat-form-field>
+                <br>
+                <mat-form-field style="margin-top: 5px;">
+                    <mat-autocomplete  #intervalAuto="matAutocomplete">
+                        <mat-option *ngFor="let option of intervalOptions" [value]="option">
+                            {{ option }}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <mat-label>Interval</mat-label>
+                    <input type="text" required placeholder="Pick one" aria-label="Number" matInput  formControlName="interval" [matAutocomplete]="intervalAuto">
+                </mat-form-field>
+                <br>
+                <mat-form-field style="margin-top: 5px;">
+                    <mat-label>TimePeriod</mat-label>
+                    <input type="Number" required  aria-label="Number" matInput  formControlName="timePeriod" >
+                </mat-form-field>
+                    <br>
+
+                    <mat-form-field style="margin-top: 5px;">
+                        <mat-autocomplete #priceTypeAuto="matAutocomplete">
+                            <mat-option *ngFor="let option of priceTypeOptions" [value]="option">
+                                {{ option }}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <mat-label>PriceType</mat-label>
+                        <input type="text" required placeholder="Pick one" aria-label="Number" matInput  formControlName="priceType" [matAutocomplete]="priceTypeAuto">
+                    </mat-form-field>
+                    <br>
+                    <mat-checkbox required formControlName="todayOnly">
+                        TodayOnly
+                    </mat-checkbox>
+            </mat-card>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-label style="text-align: center;">
+        <h2>Functions</h2>
+    </mat-label>
+    <mat-card  style="margin-top: 5px; text-align: center;">
+        <app-macd1 [parentForm]="formMyTrader"></app-macd1>
+        <app-rsi [parentForm]="formMyTrader"></app-rsi>
+    </mat-card>
+</form>
+<pre>
+{{formMyTrader.value | json}}
+</pre>

@@ -1,0 +1,8 @@
+<div>
+    <br>
+    <button mat-raised-button color="primary" (click)="macd([parentForm.value])">MACD</button>
+</div>
+<mat-card>
+    <h3>{{symbol}}-{{interval}}-{{priceType}}</h3>
+    <div id="macdPlot1"><!-- Plotly chart will be drawn inside this DIV --></div>
+</mat-card>
